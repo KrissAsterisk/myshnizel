@@ -1,6 +1,8 @@
 package Week2;
 
-public class Week02 
+import helpers.InputReader;
+
+public class Week02
 {
     public static final String CONSOLE_CLEAR = "\033[H\033[2J";
     public static void main(String[] args)
@@ -15,5 +17,17 @@ public class Week02
         System.out.println();
         System.out.println(" by Nicholas Day and Derek Peacock");
         System.out.println();
-    }     
+
+
+        int age = InputReader.getInt("What is your age? > ");
+        if (age < 18) {
+            System.out.println("You are not old enough to access this program");
+            System.exit(0);
+        } else {
+            System.out.print("You are old enough to access this program, congrats :)");
+
+        }
+    }
+
+    
 }
