@@ -2,6 +2,10 @@ package CW1;
 
 import helpers.InputReader;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Controls {
 
     public String options(){
@@ -29,5 +33,11 @@ public class Controls {
         edit[0] = InputReader.getInt("Which song would you like to edit?");
         edit[1] = InputReader.getInt("What is the new number of plays?");
         return edit;
+    }
+    void saveFile(String Playlist, int playCount, int i) throws IOException {
+        File savePlaylist = new File("Playlist.txt");
+        FileWriter writePlaylist = new FileWriter(savePlaylist, true);
+        writePlaylist.write(i + ") " + Playlist + "\n      (played " + playCount + " times)\n" );
+        writePlaylist.close();
     }
 }

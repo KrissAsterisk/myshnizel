@@ -1,5 +1,8 @@
 package CW1;
+import helpers.ConsoleColours;
 import helpers.InputReader;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -7,7 +10,7 @@ import java.util.ArrayList;
 public class CW1 {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         int choice;
         Controls controls = new Controls();
         ArrayList<String> Playlist = new ArrayList<>();
@@ -36,17 +39,20 @@ public class CW1 {
                 int songNumber = controls.removeSong();
                 Playlist.remove(songNumber);
                 playCount.remove(songNumber);
-                System.out.println("The song number " + songNumber + " has been deleted");
+                System.out.println(ConsoleColours.ANSI_RED + "The song number " + songNumber + " has been deleted" + ConsoleColours.ANSI_RESET);
             } else if (choice == 4){
                 int[] edit = controls.editPlays();
                 playCount.set(edit[0], edit[1]);
             } else if (choice == 5){
-                System.out.println("Goodbye!");
+                for (int i = 0; i < Playlist.size(); i++) {
+                    controls.saveFile(Playlist.get(i), playCount.get(i), i);
+                }
+                System.out.println("Playlist has been saved locally. Goodbye!");
                 System.exit(0);
             }
 
             } catch (IndexOutOfBoundsException e){ // no iteration needed if error caught (line 23,27 from controls)
-                System.out.println("\nThere is no song with this number, please try again.\n\n");
+                System.out.println("\n" + ConsoleColours.ANSI_RED + "There is no song with this number, please try again." + ConsoleColours.ANSI_RESET + "\n");
             }
         }while(true);
     }
