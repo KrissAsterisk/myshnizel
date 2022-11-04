@@ -10,45 +10,80 @@ import java.util.ArrayList;
 public class CW1 {
 
 
+    private static final ArrayList<Song> SongList = new ArrayList<>();
+
     public static void main(String[] args) throws IOException {
         int choice;
-        Controls controls = new Controls();
-        ArrayList<String> Playlist = new ArrayList<>();
-        ArrayList<Integer> playCount = new ArrayList<>();
-        Playlist.add("tonight - JKER");
-        Playlist.add("CANT HAVE IT - JKER");
-        playCount.add(14667148);
-        playCount.add(7436992);
+        Controls controls = new Controls(SongList);
+
+        //adding the songs to the playlist
+        Song song1 = new Song("JKER", "tonight",14667148, SongList.size());
+        SongList.add(song1);
+
+        Song song2 = new Song("JKER", "CANT HAVE IT",7436992, SongList.size());
+        SongList.add(song2);
+
+        Song song3 = new Song("Bring Me The Horizon", "Kingslayer", 93418426, SongList.size());
+        SongList.add(song3);
+
+        Song song4 = new Song("Lyn", "You Are Stronger", 1370807, SongList.size());
+        SongList.add(song4);
+
+        Song song5 = new Song("Billie Eilish", "wish you were gay", 676590870, SongList.size());
+        SongList.add(song5);
+
+        Song song6 = new Song("9 Gramm", "Плановая", 1821861, SongList.size());
+        SongList.add(song6);
+
+        Song song7 = new Song("Rauf & Faik", "Детство", 140086725, SongList.size());
+        SongList.add(song7);
+
+        Song song8 = new Song("Saba", "Ziplock", 15744444, SongList.size());
+        SongList.add(song8);
+
+        Song song9 = new Song("Joji", "Gimme Love", 291508620, SongList.size());
+        SongList.add(song9);
+
+
         System.out.println("Welcome, here are the controls to your new Playlist Maker.");
 
         do {
             try{
-            choice = InputReader.getInt(controls.options());
+                //asks user for input
+                choice = InputReader.getInt(controls.options());
+
+
             if (choice == 1) {
-                if (Playlist.isEmpty()){
-                    System.out.println("There are no songs present in this playlist.");
+                if (SongList.isEmpty()){
+                        System.out.println("There are no songs present in this playlist.");
                 } else {
-                for (int i = 0; i < Playlist.size(); i++) {
-                    controls.printSongs(Playlist.get(i), playCount.get(i), i);
-                    }
+
+                    controls.printSongs();
+
                 }
+
             } else if (choice == 2) {
-                Playlist.add(controls.addSong());
-                playCount.add(controls.addPlays());
+
+                    controls.addSong();
+
             } else if (choice == 3){
-                int songNumber = controls.removeSong();
-                Playlist.remove(songNumber);
-                playCount.remove(songNumber);
-                System.out.println(ConsoleColours.ANSI_RED + "The song number " + songNumber + " has been deleted" + ConsoleColours.ANSI_RESET);
+
+                controls.removeSong();
+
+
             } else if (choice == 4){
-                int[] edit = controls.editPlays();
-                playCount.set(edit[0], edit[1]);
+
+                controls.editPlays();
+
+
             } else if (choice == 5){
-                for (int i = 0; i < Playlist.size(); i++) {
-                    controls.saveFile(Playlist.get(i), playCount.get(i), i);
-                }
-                System.out.println("Playlist has been saved locally. Goodbye!");
+
+                controls.printPopularSongs();
+
+            } else if (choice == 6){
+
                 System.exit(0);
+
             }
 
             } catch (IndexOutOfBoundsException e){ // no iteration needed if error caught (line 23,27 from controls)
