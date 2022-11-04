@@ -86,7 +86,7 @@ public class CW1 {
 
             }
 
-            } catch (IndexOutOfBoundsException e){ // no iteration needed if error caught (line 23,27 from controls)
+            } catch (IndexOutOfBoundsException e){ // to check whenever we delete or edit songs
                 System.out.println("\n" + ConsoleColours.ANSI_RED + "There is no song with this number, please try again." + ConsoleColours.ANSI_RESET + "\n");
             }
         }while(true);
